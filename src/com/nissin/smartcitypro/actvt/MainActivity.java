@@ -37,5 +37,16 @@ public class MainActivity extends SlidingFragmentActivity {
 		beginTransaction.commit();
 		/*fm.findFragmentByTag(MAIN_CONT_FRAGMT);*/
 	}
+	//获取侧边栏对象
+	public LeftMenuFragmt getLeftMenuFragtObj()
+	{	FragmentManager fm = getSupportFragmentManager();
+		return (LeftMenuFragmt) fm.findFragmentByTag(LEFT_MENU_FRAGMT);
+	}
+	
+	//获取主内容页面对象
+	public MainContentFragmt getMainContentFragtObj()
+	{	FragmentManager fm = getSupportFragmentManager();
+		return (MainContentFragmt) fm.findFragmentByTag(MAIN_CONT_FRAGMT);
+	}
 }
 

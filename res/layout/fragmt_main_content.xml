@@ -3,6 +3,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <com.nissin.smartcitypro.view.NoScrollViewPager
+        android:id="@+id/vp_main_content"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/rg_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_tab_bg" 
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rbt_home"
+            style="@style/BottomTabStyle"
+            android:text="首页"
+            android:drawableTop="@drawable/btn_tab_home_selector"
+            />
+        <RadioButton
+            android:id="@+id/rbt_news"
+            style="@style/BottomTabStyle"
+            android:text="新闻"
+            android:drawableTop="@drawable/btn_tab_news_selector"
+            />
+        <RadioButton
+            android:id="@+id/rbt_smart"
+            style="@style/BottomTabStyle"
+            android:text="智慧服务"
+            android:drawableTop="@drawable/btn_tab_smart_selector"
+            />
+        <RadioButton
+            android:id="@+id/rbt_grov"
+            style="@style/BottomTabStyle"
+            android:text="政务"
+            android:drawableTop="@drawable/btn_tab_gov_selector"
+            />
+        <RadioButton
+            android:id="@+id/rbt_setting"
+            style="@style/BottomTabStyle"
+            android:text="设置"
+            android:drawableTop="@drawable/btn_tab_setting_selector"
+            />
+    </RadioGroup>
 
 </LinearLayout>
