@@ -1,4 +1,4 @@
-package com.nissin.smartcitypro.base.impl;
+package com.nissin.smartcitypro.base.leftimpl;
 
 import com.nissin.smartcitypro.base.BaseMenuDetailPager;
 
@@ -8,9 +8,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
-public class InteractMenuDetailPagerImpl extends BaseMenuDetailPager {
+public class TopicMenuDetailPagerImpl extends BaseMenuDetailPager {
 
-	public InteractMenuDetailPagerImpl(Activity mActivity) {
+	public TopicMenuDetailPagerImpl(Activity mActivity) {
 		super(mActivity);
 		// TODO Auto-generated constructor stub
 	}
@@ -18,7 +18,7 @@ public class InteractMenuDetailPagerImpl extends BaseMenuDetailPager {
 	@Override
 	public View initView() {
 		TextView tv = new TextView(mActivity);
-		tv.setText("详情页面-----互动");
+		tv.setText("详情页面-----专题");
 		tv.setGravity(Gravity.CENTER);
 		tv.setTextSize(22);
 		tv.setTextColor(Color.RED);

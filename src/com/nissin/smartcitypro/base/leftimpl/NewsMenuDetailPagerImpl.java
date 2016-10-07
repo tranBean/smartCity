@@ -1,22 +1,25 @@
-package com.nissin.smartcitypro.base.impl;
+package com.nissin.smartcitypro.base.leftimpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.nissin.smartcitypro.R;
 import com.nissin.smartcitypro.base.BaseMenuDetailPager;
+import com.nissin.smartcitypro.base.impl.TabMenuDetailPager;
 import com.nissin.smartcitypro.bean.NewsInfos.NewsTabInfo;
+import com.viewpagerindicator.TabPageIndicator;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageButton;
+
 /**
  * 菜单详情页-----新闻
+ * 
  * @author Administrator
  *
  */
@@ -25,8 +28,9 @@ public class NewsMenuDetailPagerImpl extends BaseMenuDetailPager {
 	private ViewPager mTabMenuViewpager;
 	private List<TabMenuDetailPager> tabMenus;
 	private ArrayList<NewsTabInfo> newsTabInfos;
-	
-	public NewsMenuDetailPagerImpl(Activity mActivity,ArrayList<NewsTabInfo> newsTabInfos) {
+	private TabPageIndicator indicator;
+
+	public NewsMenuDetailPagerImpl(Activity mActivity, ArrayList<NewsTabInfo> newsTabInfos) {
 		super(mActivity);
 		this.newsTabInfos = newsTabInfos;
 	}
@@ -35,28 +39,40 @@ public class NewsMenuDetailPagerImpl extends BaseMenuDetailPager {
 	public View initView() {
 		View view = View.inflate(mActivity, R.layout.tab_mune_viewpager, null);
 		mTabMenuViewpager = (ViewPager) view.findViewById(R.id.vp_tab_menu);
-		/*TextView tv = new TextView(mActivity);
-		tv.setText("详情页面-----新闻");
-		tv.setGravity(Gravity.CENTER);
-		tv.setTextSize(22);
-		tv.setTextColor(Color.RED);*/
+		indicator = (TabPageIndicator) view.findViewById(R.id.indicator);
+		// 跳到下一个tab
+		ImageButton ib2nextTab = (ImageButton) view.findViewById(R.id.ib_tonext);
+		ib2nextTab.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				int currentItem = mTabMenuViewpager.getCurrentItem();
+				mTabMenuViewpager.setCurrentItem(++currentItem);
+			}
+		});
 		return view;
 	}
-	
+
 	@Override
-	public void initData() {//注意这个方法的调用   时机！！！！！！
+	public void initData() {// 注意这个方法的调用 时机！！！！！！
 		tabMenus = new ArrayList<TabMenuDetailPager>();
-		for(int i=0;i<newsTabInfos.size();i++)
-		{
-			TabMenuDetailPager tabmenu = new TabMenuDetailPager(mActivity);
+		for (int i = 0; i < newsTabInfos.size(); i++) {
+			TabMenuDetailPager tabmenu = new TabMenuDetailPager(mActivity, newsTabInfos.get(i));
 			tabmenu.tabTitle = newsTabInfos.get(i).title;
 			tabMenus.add(tabmenu);
 		}
 		mTabMenuViewpager.setAdapter(new TabMenuVpAdapter());
+		// 设置tab向导 必须在viewpager设置adapter后才可以调用
+		indicator.setViewPager(mTabMenuViewpager);
 	}
-	//tab菜单
-	class TabMenuVpAdapter extends PagerAdapter
-	{
+
+	// tab菜单
+	class TabMenuVpAdapter extends PagerAdapter {
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return newsTabInfos.get(position).title;
+		}
 
 		@Override
 		public int getCount() {
@@ -66,7 +82,7 @@ public class NewsMenuDetailPagerImpl extends BaseMenuDetailPager {
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 			container.addView(tabMenus.get(position).mRootView);
-			tabMenus.get(position).initData();//暂时先放这初始化数据
+			tabMenus.get(position).initData();// 暂时先放这初始化数据
 			return tabMenus.get(position).mRootView;
 		}
 
@@ -80,5 +96,4 @@ public class NewsMenuDetailPagerImpl extends BaseMenuDetailPager {
 			return view == object;
 		}
 	}
-
 }

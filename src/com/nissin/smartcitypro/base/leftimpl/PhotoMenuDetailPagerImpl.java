@@ -1,4 +1,4 @@
-package com.nissin.smartcitypro.base.impl;
+package com.nissin.smartcitypro.base.leftimpl;
 
 import com.nissin.smartcitypro.base.BaseMenuDetailPager;
 

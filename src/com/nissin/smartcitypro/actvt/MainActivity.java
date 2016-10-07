@@ -9,6 +9,7 @@ import com.nissin.smartcitypro.fragmt.MainContentFragmt;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Window;
 
 public class MainActivity extends SlidingFragmentActivity {
 
@@ -17,6 +18,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setBehindContentView(R.layout.sliding_left);//设置侧边栏

@@ -31,8 +31,10 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
         <!-- MainActivity页面 -->
         <activity android:name=".actvt.MainActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:theme="@style/Theme.PageIndicatorDefaults"
+            
             />
+        <!-- android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" -->
     </application>
 
 </manifest>
