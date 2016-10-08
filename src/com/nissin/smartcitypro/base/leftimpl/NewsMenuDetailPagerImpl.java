@@ -3,7 +3,9 @@ package com.nissin.smartcitypro.base.leftimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.nissin.smartcitypro.R;
+import com.nissin.smartcitypro.actvt.MainActivity;
 import com.nissin.smartcitypro.base.BaseMenuDetailPager;
 import com.nissin.smartcitypro.base.impl.TabMenuDetailPager;
 import com.nissin.smartcitypro.bean.NewsInfos.NewsTabInfo;
@@ -12,6 +14,7 @@ import com.viewpagerindicator.TabPageIndicator;
 import android.app.Activity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -23,7 +26,7 @@ import android.widget.ImageButton;
  * @author Administrator
  *
  */
-public class NewsMenuDetailPagerImpl extends BaseMenuDetailPager {
+public class NewsMenuDetailPagerImpl extends BaseMenuDetailPager implements OnPageChangeListener{
 
 	private ViewPager mTabMenuViewpager;
 	private List<TabMenuDetailPager> tabMenus;
@@ -50,6 +53,7 @@ public class NewsMenuDetailPagerImpl extends BaseMenuDetailPager {
 				mTabMenuViewpager.setCurrentItem(++currentItem);
 			}
 		});
+		indicator.setOnPageChangeListener(this);
 		return view;
 	}
 
@@ -95,5 +99,27 @@ public class NewsMenuDetailPagerImpl extends BaseMenuDetailPager {
 		public boolean isViewFromObject(View view, Object object) {
 			return view == object;
 		}
+	}
+
+	@Override
+	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+	}
+
+	@Override
+	public void onPageSelected(int position) {
+		System.out.println("监听到了吗");
+		MainActivity mainActivity = (MainActivity) mActivity;
+		SlidingMenu slidingMenu = mainActivity.getSlidingMenu();
+		if(position == 0)
+		{//如果在北京位置上， 希望可以拉出侧边栏
+			slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		}else
+		{//不希望拉出侧边栏
+			slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+		}
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int state) {
 	}
 }
